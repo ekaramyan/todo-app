@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-##To run it
+## To run it
 you have to install strapi and to run localhost with to-dos
 
 ## Getting Started
