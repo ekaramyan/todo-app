@@ -6,7 +6,7 @@ import TodoList from "../containers/todoList";
 import axios from "axios";
 
 export default function Home() {
-  const api = 'http://localhost:1337/api/to-dos'
+  const api = 'http://localhost:1337/api/to-dos';
 
   const [todos, setTodos] = useState([]);
 
