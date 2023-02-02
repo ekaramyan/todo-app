@@ -2,7 +2,6 @@ import TodoItem from "../components/todoitem";
 
 
 const TodoList = ({ todos = [{}], editTodoItem, deleteTodoItem }) => {
-    console.log(todos, '1')
 
     return (
         <div className="todoListContainer">
@@ -13,7 +12,7 @@ const TodoList = ({ todos = [{}], editTodoItem, deleteTodoItem }) => {
                     .map((todo, id) => (
                         <TodoItem
                             key={id}
-                            todo={todo}
+                            todo={todo.attributes}
                             deleteTodoItem={deleteTodoItem}
                             editTodoItem={editTodoItem}
                         />
