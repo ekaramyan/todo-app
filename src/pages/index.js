@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import Header from "../components/header";
 import AddTodo from "../containers/addTodo";
-import TodoList from "../containers/todoList";
+import TodoList from "../containers/todolist";
 import axios from "axios";
 
 export default function Home() {
@@ -10,12 +10,20 @@ export default function Home() {
 
   const [todos, setTodos] = useState([]);
 
-  let todo_get = async () => {
-    const result = await axios.get(api);
-    setTodos(result?.data);
-  }
 
-  useEffect(todo_get(), []);
+
+
+  useEffect(() => {
+    const todo_get = async () => {
+      const result = await axios.get(api); //calling api
+      setTodos(result?.data); //setting fetched data
+    }
+
+    todo_get() //calling function
+
+      .catch(console.error) //catching errors
+
+  }, []);
 
   const addTodo = async (todoText) => {
     if (todoText && todoText.length > 0) {

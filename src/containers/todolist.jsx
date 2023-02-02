@@ -6,14 +6,14 @@ function TodoList({ todos, editTodoItem, deleteTodoItem }) {
             <div className="todosText">Todos</div>
             {todos
                 .sort((a, b) => b.created_at.localeCompare(a.created_at))
-                .map((todo, i) => (
+                .map((todo, i) => 
                     <TodoItem
                         todo={todo}
                         key={i}
                         deleteTodoItem={deleteTodoItem}
                         editTodoItem={editTodoItem}
                     />
-                ))}
+                )}
         </div>
     );
 }
