@@ -1,8 +1,12 @@
-function TodoItem({ todo, editTodoItem, deleteTodoItem }) {
+function TodoItem({todo, editTodoItem, deleteTodoItem }) {
+    console.log(todo.attributes.ToDoText, '333')
+    // let text = todo.ToDoText;
+    // console.log(text, 'text')
+
     return (
         <>
             <div className="todoItem">
-                <div className="todoItemText">{todo.todoText}</div>
+                <div className="todoItemText">{todo.attributes.ToDoText}</div>
                 <div className="todoItemControls">
                     <i className="todoItemControlEdit">
                         <button className="bg-default" onClick={() => editTodoItem(todo)}>

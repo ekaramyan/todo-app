@@ -6,58 +6,56 @@ import TodoList from "../containers/todolist";
 import axios from "axios";
 
 export default function Home() {
-  const api = 'http://localhost:1337/api/to-dos';
+  let [todos, setTodos] = useState([]);
 
-  const [todos, setTodos] = useState([]);
-
-
-
+  const link = 'http://localhost:1337/api/to-dos';
 
   useEffect(() => {
-    const todo_get = async () => {
-      const result = await axios.get(api); //calling api
-      setTodos(result?.data); //setting fetched data
-    }
+      const todo_get = async () => {
+          const result = await axios.get(link); //calling api
+          console.log(result)
+          setTodos(result.data); //setting fetched data
+      }
 
-    todo_get() //calling function
+      todo_get() //calling function
 
-      .catch(console.error) //catching errors
 
+          .catch(console.error) //catching errors
   }, []);
 
-  const addTodo = async (todoText) => {
-    if (todoText && todoText.length > 0) {
-      const result = await axios.post(api, {
-        todoText: todoText,
-      });
-      setTodos([...todos, result?.data]);
-    }
+  const addTodo = async (ToDoText) => {
+      if (ToDoText && ToDoText.length > 0) {
+          const result = await axios.post(link, {
+              ToDoText: ToDoText,
+          });
+          setTodos([...todos, result?.data]);
+      }
   };
 
   const deleteTodoItem = async (todo) => {
-    if (confirm("Do you really want to delete this item?")) {
-      await axios.delete(api + todo.id);
-      const newTodos = todos.filter((_todo) => _todo.id !== todo.id);
-      console.log(newTodos);
-      setTodos(newTodos);
-    }
+      if (confirm("Do you really want to delete this item?")) {
+          await axios.delete(link + todo.id);
+          const newTodos = todos.filter((_todo) => _todo.id !== todo.id);
+          console.log(newTodos);
+          setTodos(newTodos);
+      }
   };
 
   const editTodoItem = async (todo) => {
-    const newTodoText = prompt("Enter new todo text or description:");
-    if (newTodoText != null) {
-      const result = await axios.put(api + todo.id, {
-        todoText: newTodoText,
-      });
-      const moddedTodos = todos.map((_todo) => {
-        if (_todo.id === todo.id) {
-          return result?.data;
-        } else {
-          return _todo;
-        }
-      });
-      setTodos(moddedTodos);
-    }
+      const newToDoText = prompt("Enter new todo text or description:");
+      if (newToDoText != null) {
+          const result = await axios.put(link + todo.id, {
+              ToDoText: newToDoText,
+          });
+          const moddedTodos = todos.map((_todo) => {
+              if (_todo.id === todo.id) {
+                  return result?.data;
+              } else {
+                  return _todo;
+              }
+          });
+          setTodos(moddedTodos);
+      }
   };
 
   return (
@@ -70,7 +68,7 @@ export default function Home() {
       <main className="main">
         <AddTodo addTodo={addTodo} />
         <TodoList
-          todos={todos}
+          todos={todos.data}
           deleteTodoItem={deleteTodoItem}
           editTodoItem={editTodoItem}
         />
