@@ -16,18 +16,34 @@ export default function Home() {
             setTodos(result.data); //setting fetched data
         }
 
+
         todo_get() //calling function
 
 
             .catch(console.error) //catching errors
     }, []);
 
+
     const addTodo = async (ToDoText) => {
+
+        // console.log(ToDoText)
+        // console.log(todos.data)
+        // let n = todos.data.length
+        // console.log(n)
+        // const todo = todos.data[--n]
+        // console.log(todo)
+        // if (!todo) {
+        //     return null
+        // }
+        // console.log(todo,'q')
+
+
         if (ToDoText && ToDoText.length > 0) {
             const result = await axios.post(link, {
-                ToDoText: ToDoText
+                ToDoText: todo
             });
-            setTodos([...todos, result?.data]);
+            console.log(result.data)
+            setTodos([...todos.data, result.data]);
         }
     };
 
