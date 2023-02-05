@@ -7,8 +7,6 @@ import axios from "axios";
 
 export default function Home() {
     let [todos, setTodos] = useState([]);
-    let [ToDoText, setText] = useState('');
-
 
     const link = 'http://localhost:1337/api/to-dos/';
 
@@ -17,11 +15,7 @@ export default function Home() {
             const result = await axios.get(link); //calling api
             setTodos(result.data); //setting fetched data
         }
-
-
         todo_get() //calling function
-
-
             .catch(console.error) //catching errors
     }, []);
 
@@ -32,9 +26,10 @@ export default function Home() {
 
 
 
-    const addTodo = async (ToDoText, text) => {
+    const addTodo = async (ToDoText, todo_get) => {
 
         console.log(ToDoText)
+        console.log(...todos.data)
 
         if (ToDoText && ToDoText.length > 0) {
             const result = await axios.post(link, {
@@ -42,10 +37,8 @@ export default function Home() {
                     ToDoText: ToDoText,
                 }
             })
-            setTodos([...todos.data, result.data]);
-            setText('');
-            console.log(result.data)
-
+            setTodos([...todos.data, result.data.data]);
+            console.log(result.data.data)
         }
     };
 
@@ -65,11 +58,13 @@ export default function Home() {
         }
     };
 
-    const editTodoItem = async (todo) => {
+    const editTodoItem = async (todo, todos = [{}]) => {
         const newToDoText = prompt("Enter new todo text or description:");
         if (newToDoText != null) {
             const result = await axios.put(link + todo.id, {
+                'data':{
                 ToDoText: newToDoText,
+                }
             });
             const moddedTodos = todos.map((_todo) => {
                 if (_todo.id === todo.id) {
