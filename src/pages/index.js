@@ -7,8 +7,10 @@ import axios from "axios";
 
 export default function Home() {
     let [todos, setTodos] = useState([]);
+    let [ToDoText, setText] = useState('');
 
-    const link = 'http://localhost:1337/api/to-dos';
+
+    const link = 'http://localhost:1337/api/to-dos/';
 
     useEffect(() => {
         const todo_get = async () => {
@@ -23,34 +25,39 @@ export default function Home() {
             .catch(console.error) //catching errors
     }, []);
 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     addTodo(ToDoText);
+    // };
 
-    const addTodo = async (ToDoText) => {
 
-        // console.log(ToDoText)
-        // console.log(todos.data)
-        // let n = todos.data.length
-        // console.log(n)
-        // const todo = todos.data[--n]
-        // console.log(todo)
-        // if (!todo) {
-        //     return null
-        // }
-        // console.log(todo,'q')
 
+    const addTodo = async (ToDoText, text) => {
+
+        console.log(ToDoText)
 
         if (ToDoText && ToDoText.length > 0) {
             const result = await axios.post(link, {
-                ToDoText: todo
-            });
-            console.log(result.data)
+                "data": {
+                    ToDoText: ToDoText,
+                }
+            })
             setTodos([...todos.data, result.data]);
+            setText('');
+            console.log(result.data)
+
         }
     };
 
 
-    const deleteTodoItem = async (todo) => {
+    const deleteTodoItem = async (todo, id) => {
+        console.log(todo)
+        console.log (id)
+        // if (!todo.id) {
+        //     return null
+        // }
         if (confirm("Do you really want to delete this item?")) {
-            await axios.delete(link + todo.id);
+            await axios.delete(link + id.id);
             const newTodos = todos.filter((_todo) => _todo.id !== todo.id);
             console.log(newTodos);
             setTodos(newTodos);

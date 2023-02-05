@@ -1,4 +1,4 @@
-function TodoItem({ todo, editTodoItem, deleteTodoItem }) {
+function TodoItem({ todo, id, editTodoItem, deleteTodoItem }) {
 
     if (!todo) {
         return null
@@ -6,7 +6,7 @@ function TodoItem({ todo, editTodoItem, deleteTodoItem }) {
 
     return (
         <>
-            <div className="todoItem">
+            <div className="todoItem" key={id}>
                 <div className="todoItemText">{todo.ToDoText}</div>
                 <div className="todoItemControls">
                     <i className="todoItemControlEdit">
