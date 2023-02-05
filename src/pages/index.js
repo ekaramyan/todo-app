@@ -50,14 +50,15 @@ export default function Home() {
     };
 
 
-    const deleteTodoItem = async (todo, id) => {
-        console.log(todo)
-        console.log (id)
+    const deleteTodoItem = async (todo, todos = [{}]) => {
+        console.log(todo.id)
+        // console.log (id)
         // if (!todo.id) {
         //     return null
         // }
+
         if (confirm("Do you really want to delete this item?")) {
-            await axios.delete(link + id.id);
+            await axios.delete(link + todo.id);
             const newTodos = todos.filter((_todo) => _todo.id !== todo.id);
             console.log(newTodos);
             setTodos(newTodos);

@@ -1,13 +1,13 @@
-function TodoItem({ todo, id, editTodoItem, deleteTodoItem }) {
+function TodoItem({ todo, editTodoItem, deleteTodoItem }) {
 
-    if (!todo) {
+    if (!todo.attributes) {
         return null
     }
 
     return (
         <>
-            <div className="todoItem" key={id}>
-                <div className="todoItemText">{todo.ToDoText}</div>
+            <div className="todoItem">
+                <div className="todoItemText">{todo.attributes.ToDoText}</div>
                 <div className="todoItemControls">
                     <i className="todoItemControlEdit">
                         <button className="bg-default" onClick={() => editTodoItem(todo)}>
