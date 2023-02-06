@@ -2,12 +2,13 @@ import TodoItem from "../components/todoitem";
 
 
 const TodoList = ({ todos = [], editTodoItem, deleteTodoItem }) => {
+    console.log(todos)
     return (
         <div className="todoListContainer">
             <div className="todosText">Todos</div>
             {
                 todos
-                    // .sort((a, b) => b.created_at.localeCompare(a.created_at))
+                .sort((a, b) => b.attributes.createdAt.localeCompare(a.attributes.createdAt))
                     .map((todo, id) => (
                         <TodoItem
                             key={id}

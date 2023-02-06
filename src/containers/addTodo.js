@@ -18,6 +18,7 @@ function AddTodo({ addTodo }) {
           className="todoInputButton"
           type="button"
           value="Add Todo"
+
           onClick={() => {
             addTodo(todoText.value);
             todoText.value = "";
