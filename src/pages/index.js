@@ -19,14 +19,7 @@ export default function Home() {
             .catch(console.error) //catching errors
     }, []);
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     addTodo(ToDoText);
-    // };
-
-
-
-    const addTodo = async (ToDoText, todo_get) => {
+    const addTodo = async (ToDoText) => {
 
         console.log(ToDoText)
         console.log(...todos.data)
@@ -45,10 +38,6 @@ export default function Home() {
 
     const deleteTodoItem = async (todo, todos = [{}]) => {
         console.log(todo.id)
-        // console.log (id)
-        // if (!todo.id) {
-        //     return null
-        // }
 
         if (confirm("Do you really want to delete this item?")) {
             await axios.delete(link + todo.id);
@@ -62,8 +51,8 @@ export default function Home() {
         const newToDoText = prompt("Enter new todo text or description:");
         if (newToDoText != null) {
             const result = await axios.put(link + todo.id, {
-                'data':{
-                ToDoText: newToDoText,
+                'data': {
+                    ToDoText: newToDoText,
                 }
             });
             const moddedTodos = todos.map((_todo) => {

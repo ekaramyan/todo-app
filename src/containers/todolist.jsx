@@ -1,7 +1,7 @@
 import TodoItem from "../components/todoitem";
 
 
-const TodoList = ({ todos = [{}], editTodoItem, deleteTodoItem }) => {
+const TodoList = ({ todos = [], editTodoItem, deleteTodoItem }) => {
     return (
         <div className="todoListContainer">
             <div className="todosText">Todos</div>
