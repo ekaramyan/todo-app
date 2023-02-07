@@ -14,7 +14,6 @@ export default function Home() {
         const todo_get = async () => {
             const result = await axios.get(link); //calling api
             setTodos(result.data); //setting fetched data
-            console.log(result.data, 'исходный')
         }
         todo_get() //calling function
             .catch(console.error) //catching errors
@@ -23,9 +22,6 @@ export default function Home() {
 
 
     const addTodo = async (ToDoText) => {
-
-        console.log(ToDoText)
-
         if (ToDoText && ToDoText.length > 0) {
             const result = await axios.post(link, {
                 "data": {
@@ -58,7 +54,6 @@ export default function Home() {
     };
 
     const editTodoItem = async (todo, ToDoText) => {
-        console.log(todos)
         const newToDoText = prompt("Enter new todo text or description:");
         if (newToDoText != null) {
             const result = await axios.put(link + todo.id, {
@@ -67,32 +62,17 @@ export default function Home() {
                 }
             });
 
-
-            // const moddedTodos = todos.map((_todo) => {
-            //     if (_todo.id === todo.id) {
-            //         return result.data;
-            //     } else {
-            //         return _todo;
-            //     }
-            // });
-            const data = todos.data;
-
-            const newTodos = data.map((_todo) => (
+            const newTodos = todos.data.map((_todo) => (
                 _todo.id === todo.id
                     ? result.data.data
                     : _todo
-                    ));
-
-            console.log(newTodos)
+            ));
 
             const moddedTodos = {
                 data: newTodos,
 
                 meta: { ...todos.meta }
             }
-
-            console.log(moddedTodos)
-
             setTodos(moddedTodos);
 
         };
