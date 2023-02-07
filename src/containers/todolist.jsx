@@ -2,7 +2,6 @@ import TodoItem from "../components/todoitem";
 
 
 const TodoList = ({ todos = [], editTodoItem, deleteTodoItem }) => {
-    console.log(todos)
     return (
         <div className="todoListContainer">
             <div className="todosText">Todos</div>

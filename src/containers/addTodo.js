@@ -1,4 +1,4 @@
-function AddTodo({ addTodo }) {
+function AddTodo({ addTodo, todos }) {
   return (
     <>
       <div className="addTodoContainer">
@@ -9,8 +9,10 @@ function AddTodo({ addTodo }) {
           id="todoText"
           onKeyDown={(e) => {
             if (e.code === "Enter") {
-              addTodo(todoText.value);
-              todoText.value = "";
+              // addTodo(todoText.value);
+              addTodo(todoText.value)
+              todoText.value = '';
+              window.location.reload(false); // заглушка
             }
           }}
         />
@@ -22,6 +24,7 @@ function AddTodo({ addTodo }) {
           onClick={() => {
             addTodo(todoText.value);
             todoText.value = "";
+            window.location.reload(false); //заглушка
           }}
         />
       </div>

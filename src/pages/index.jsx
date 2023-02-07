@@ -6,7 +6,7 @@ import TodoList from "../containers/todolist";
 import axios from "axios";
 
 export default function Home() {
-    let [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useState([]);
 
     const link = 'http://localhost:1337/api/to-dos/';
 
@@ -31,7 +31,7 @@ export default function Home() {
                 }
             })
             setTodos([...todos.data, result.data.data]);
-            console.log(result.data.data)
+            console.log(...todos.data, 'addtodo')
         }
     };
 
@@ -44,6 +44,7 @@ export default function Home() {
             const newTodos = todos.filter((_todo) => _todo.id !== todo.id);
             console.log(newTodos);
             setTodos(newTodos);
+            window.location.reload(false); // заглушка
         }
     };
 
@@ -57,14 +58,17 @@ export default function Home() {
             });
             const moddedTodos = todos.map((_todo) => {
                 if (_todo.id === todo.id) {
-                    return result?.data;
+                    return result.data;
                 } else {
                     return _todo;
                 }
             });
             setTodos(moddedTodos);
+            window.location.reload(false); // заглушка
         }
     };
+
+
 
     return (
         <div>
